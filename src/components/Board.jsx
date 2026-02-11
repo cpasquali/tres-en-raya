@@ -28,6 +28,34 @@ export const Board = ({ board, setBoard, winner, setWinner }) => {
   };
 
   useEffect(() => {
+    const handleButtonPress = (e) => {
+      if (
+        e.key !== "1" &&
+        e.key !== "2" &&
+        e.key !== "3" &&
+        e.key !== "4" &&
+        e.key !== "5" &&
+        e.key !== "6" &&
+        e.key !== "7" &&
+        e.key !== "8" &&
+        e.key !== "9"
+      )
+        return;
+
+      const index = Number(e.key) - 1;
+      const newBoard = [...board];
+      if (newBoard[index] || winner) return;
+      newBoard[index] = player;
+      setBoard(newBoard);
+      setPlayer(player === "X" ? "O" : "X");
+    };
+
+    window.addEventListener("keydown", handleButtonPress);
+
+    return () => window.removeEventListener("keydown", handleButtonPress);
+  });
+
+  useEffect(() => {
     handleWinner(board);
   }, [board]);
 
@@ -36,6 +64,7 @@ export const Board = ({ board, setBoard, winner, setWinner }) => {
       {board.map((_, index) => (
         <Square
           key={index}
+          index={index}
           onSquareClick={() => handleSquareClick(index)}
           value={board[index]}
           className={board[index]}
