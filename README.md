@@ -5,7 +5,6 @@ Pequeño proyecto desarrollado con React para jugar al clásico Tres en Raya (Ta
 ## Tecnologías utilizadas
 
 - React
-- JavaScript
 - CSS
 - Vite
 
